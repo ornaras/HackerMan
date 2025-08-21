@@ -1,6 +1,7 @@
 #include <random>
 #include <iostream>
 #include "utils.cpp"
+#include "constants.h"
 
 const std::string SYMBOLS[]{
 	"qwertyuiopasdfghjklzxcvbm",
@@ -18,7 +19,7 @@ static int random(int min, int max) {
 }
 
 static std::string genDictionary() {
-	int size{ inputDigit("Input dictionary's size", 75) };
+	int size{ inputDigit("Input dictionary's size", DEFAULT_SIZE_DICT) };
 	std::string dict;
 	for (int i{ 0 }; i < size; i++) {
 		std::string characters{ SYMBOLS[random(0, std::size(SYMBOLS) - 1)] };
@@ -31,7 +32,7 @@ static std::string genDictionary() {
 
 static std::string genPassword() {
 	std::string dict{ genDictionary() };
-	int len{ random(7, 15) };
+	int len{ random(MIN_SIZE_PASSWORD, MAX_SIZE_PASSWORD) };
 	std::string passwd;
 
 	for (int i{ 0 }; i < len; i++) {
