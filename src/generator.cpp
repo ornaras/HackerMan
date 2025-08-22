@@ -1,24 +1,20 @@
-#include <random>
 #include "generator.h"
 #include "utils.h"
 #include "constants.h"
 
-const std::string SYMBOLS[]{
-	"qwertyuiopasdfghjklzxcvbm",
-	"QWERTYUIOPASDFGHJKLZXCVBNM",
-	"1234567890",
-	"[]{}()<>"
-};
+Generator::Generator() : dev(), rng(dev()) {
+	dict = initDictionary();
+	passwd = initPassword();
+	passwdLenght = std::size(passwd);
+}
 
-static int random(int min, int max) {
-	std::random_device dev;
-	std::mt19937 rng(dev());
+int Generator::random(int min, int max) {
 	std::uniform_int_distribution<std::mt19937::result_type>
 		dist(min, max);
 	return dist(rng);
 }
 
-static std::string genDictionary() {
+std::string Generator::initDictionary() {
 	int size{ inputDigit("Input dictionary's size", (int)DEFAULT_SIZE_DICT) };
 	if (size <= 0) size = (int)DEFAULT_SIZE_DICT;
 	std::string dict;
@@ -33,8 +29,7 @@ static std::string genDictionary() {
 	return dict;
 }
 
-std::string genPassword() {
-	std::string dict{ genDictionary() };
+std::string Generator::initPassword() {
 	int len{ random((int)MIN_SIZE_PASSWORD, (int)MAX_SIZE_PASSWORD) };
 	std::string passwd;
 
@@ -46,4 +41,8 @@ std::string genPassword() {
 	std::cout << "Password: " << passwd << std::endl;
 #endif 
 	return passwd;
+}
+
+bool Generator::check_passwd(std::string input) {
+	return passwd == input;
 }
