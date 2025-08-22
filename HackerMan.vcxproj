@@ -71,14 +71,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="app.cpp" />
-    <ClCompile Include="generator.cpp" />
-    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="src\app.cpp" />
+    <ClCompile Include="src\generator.cpp" />
+    <ClCompile Include="src\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="constants.h" />
-    <ClInclude Include="generator.h" />
-    <ClInclude Include="utils.h" />
+    <ClInclude Include="src\constants.h" />
+    <ClInclude Include="src\generator.h" />
+    <ClInclude Include="src\utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
