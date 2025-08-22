@@ -1,7 +1,7 @@
-#include <iostream>
+#include "utils.h"
 #include <sstream>
 
-static int inputDigit(std::string text, int defaultValue) {
+int inputDigit(std::string text, int defaultValue) {
 	std::cout << text << " [" << defaultValue << "]: ";
 	std::string raw{ "" };
 	std::getline(std::cin, raw);
@@ -16,7 +16,7 @@ static int inputDigit(std::string text, int defaultValue) {
 	}
 }
 
-static std::string inputString(std::string text) {
+std::string inputString(std::string text) {
 	std::cout << text << ": ";
 	std::string value{ "" };
 	std::getline(std::cin, value);

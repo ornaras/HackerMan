@@ -1,6 +1,6 @@
 #include <random>
-#include <iostream>
-#include "utils.cpp"
+#include "generator.h"
+#include "utils.h"
 #include "constants.h"
 
 const std::string SYMBOLS[]{
@@ -30,7 +30,7 @@ static std::string genDictionary() {
 	return dict;
 }
 
-static std::string genPassword() {
+std::string genPassword() {
 	std::string dict{ genDictionary() };
 	int len{ random(MIN_SIZE_PASSWORD, MAX_SIZE_PASSWORD) };
 	std::string passwd;
