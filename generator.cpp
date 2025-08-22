@@ -19,7 +19,8 @@ static int random(int min, int max) {
 }
 
 static std::string genDictionary() {
-	int size{ inputDigit("Input dictionary's size", DEFAULT_SIZE_DICT) };
+	int size{ inputDigit("Input dictionary's size", (int)DEFAULT_SIZE_DICT) };
+	if (size <= 0) size = (int)DEFAULT_SIZE_DICT;
 	std::string dict;
 	for (int i{ 0 }; i < size; i++) {
 		std::string characters{ SYMBOLS[random(0, std::size(SYMBOLS) - 1)] };
@@ -32,7 +33,7 @@ static std::string genDictionary() {
 
 std::string genPassword() {
 	std::string dict{ genDictionary() };
-	int len{ random(MIN_SIZE_PASSWORD, MAX_SIZE_PASSWORD) };
+	int len{ random((int)MIN_SIZE_PASSWORD, (int)MAX_SIZE_PASSWORD) };
 	std::string passwd;
 
 	for (int i{ 0 }; i < len; i++) {
