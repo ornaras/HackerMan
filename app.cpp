@@ -4,7 +4,9 @@
 
 int main() {
 	std::string passwd{ genPassword() };
-	for (int i{ 0 }; i < MAX_COUNT_TRIES;i++) {
+	int countAttempts{ inputDigit("Input number of attempts", (int)DEFAULT_COUNT_ATTEMPTS) };
+
+	for (int i{ 0 }; i < countAttempts; i++) {
 		std::cout << std::endl;
 		std::string input{ inputString("Enter a password") };
 		if (input == passwd) {
