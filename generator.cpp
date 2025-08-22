@@ -27,7 +27,9 @@ static std::string genDictionary() {
 		std::string symbol(1, characters[random(0, std::size(characters) - 1)]);
 		dict.append(symbol);
 	}
+#if _DEBUG
 	std::cout << "Dictionary: " << dict << std::endl;
+#endif 
 	return dict;
 }
 
@@ -40,6 +42,8 @@ std::string genPassword() {
 		std::string symbol(1, dict[random(0, std::size(dict) - 1)]);
 		passwd.append(symbol);
 	}
+#if _DEBUG
 	std::cout << "Password: " << passwd << std::endl;
+#endif 
 	return passwd;
 }
