@@ -15,3 +15,10 @@ static int inputDigit(std::string text, int defaultValue) {
 		return defaultValue;
 	}
 }
+
+static std::string inputString(std::string text) {
+	std::cout << text << ": ";
+	std::string value{ "" };
+	std::getline(std::cin, value);
+	return value;
+}
