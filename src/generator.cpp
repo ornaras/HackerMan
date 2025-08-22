@@ -46,3 +46,17 @@ std::string Generator::initPassword() {
 bool Generator::check_passwd(std::string input) {
 	return passwd == input;
 }
+
+void Generator::print_tips(std::string input) {
+	int count{ random(0, 1) };
+	if (count == 0) return;
+	std::cout << std::endl << "Tips:" << std::endl;
+	if (count >= 1) {
+		std::string status;
+		unsigned inpSize{ std::size(input) };
+		if (inpSize < passwdLenght) status = "longer than";
+		else if (inpSize > passwdLenght) status = "less than";
+		else status = "exactly";
+		std::cout << "- The password is " << status << " " << inpSize << " characters" << std::endl;
+	}
+}

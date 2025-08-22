@@ -12,6 +12,7 @@ class Generator{
 public:
 	Generator();
 
+	void print_tips(std::string);
 	bool check_passwd(std::string);
 private:
 	std::string initDictionary();

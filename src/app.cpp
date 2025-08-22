@@ -15,7 +15,7 @@ int main() {
 		}
 		else {
 			std::cout << "Wrong password!" << std::endl;
-			//todo tips
+			gen.print_tips(input);
 		}
 	}
 }
