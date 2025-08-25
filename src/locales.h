@@ -4,6 +4,7 @@
 namespace locales {
 #if _RUSSIAN
 	const std::string you_win = "Ты победил!";
+	const std::string you_lose = "Ты проиграл!";
 	const std::string wrong_passwd = "Неверный пароль!";
 	const std::string input_passwd = "Введите пароль";
 	const std::string input_attempts = "Введите количество попыток";
@@ -19,6 +20,7 @@ namespace locales {
 	const std::string tip_size_end = " символов";
 #else
 	const std::string you_win = "You Win!";
+	const std::string you_lose = "You Lose!";
 	const std::string wrong_passwd = "Wrong password!";
 	const std::string input_passwd = "Enter a password";
 	const std::string input_attempts = "Input number of attempts";

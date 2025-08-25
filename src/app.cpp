@@ -20,4 +20,5 @@ int main() {
 			gen.print_tips(input);
 		}
 	}
+	std::cout << locales::you_lose << std::endl;
 }
