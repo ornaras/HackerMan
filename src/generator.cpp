@@ -1,6 +1,7 @@
 #include "generator.h"
 #include "utils.h"
 #include "constants.h"
+#include "locales.h"
 
 Generator::Generator() : dev(), rng(dev()) {
 	dict = initDictionary();
@@ -15,7 +16,7 @@ int Generator::random(int min, int max) {
 }
 
 std::string Generator::initDictionary() {
-	int size{ inputDigit("Input dictionary's size", (int)DEFAULT_SIZE_DICT) };
+	int size{ inputDigit(locales::input_dict_size, (int)DEFAULT_SIZE_DICT) };
 	if (size <= 0) size = (int)DEFAULT_SIZE_DICT;
 	std::string dict;
 	for (int i{ 0 }; i < size; i++) {
@@ -24,7 +25,7 @@ std::string Generator::initDictionary() {
 		dict.append(symbol);
 	}
 #if _DEBUG
-	std::cout << "Dictionary: " << dict << std::endl;
+	std::cout << locales::dictionary << dict << std::endl;
 #endif 
 	return dict;
 }
@@ -38,7 +39,7 @@ std::string Generator::initPassword() {
 		passwd.append(symbol);
 	}
 #if _DEBUG
-	std::cout << "Password: " << passwd << std::endl;
+	std::cout << locales::password << passwd << std::endl;
 #endif 
 	return passwd;
 }
@@ -50,13 +51,13 @@ bool Generator::check_passwd(std::string input) {
 void Generator::print_tips(std::string input) {
 	int count{ random(0, 1) };
 	if (count == 0) return;
-	std::cout << std::endl << "Tips:" << std::endl;
+	std::cout << std::endl << locales::tips << std::endl;
 	if (count >= 1) {
 		std::string status;
 		unsigned inpSize{ std::size(input) };
-		if (inpSize < passwdLenght) status = "longer than";
-		else if (inpSize > passwdLenght) status = "less than";
-		else status = "exactly";
-		std::cout << "- The password is " << status << " " << inpSize << " characters" << std::endl;
+		if (inpSize < passwdLenght) status = locales::tip_size_longer;
+		else if (inpSize > passwdLenght) status = locales::tip_size_less;
+		else status = locales::tip_size_exactly;
+		std::cout << "- " << locales::tip_size_begin << status << inpSize << locales::tip_size_end << std::endl;
 	}
 }
