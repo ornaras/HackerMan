@@ -16,6 +16,8 @@ var (
 )
 
 func init() {
+	locale = l10n.GetCurrentLocale()
+
 	flag.Uint64Var(&numbSeed, "seed", 0, locale.SeedStartArgDescription)
 }
 
