@@ -43,6 +43,13 @@ func ParseSeed(digit uint64) Seed {
 	return seed
 }
 
+func ParseOrGenerateSeed(digit uint64) Seed {
+	if digit == 0 {
+		return GenerateSeed()
+	}
+	return ParseSeed(digit)
+}
+
 type Seed struct {
 	SizeDictionary uint16 // 16 bits
 	SizePassword   uint16 // if -= 8 then 8 bits
