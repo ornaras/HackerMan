@@ -50,6 +50,7 @@ func main() {
 				userName = u.Username
 			}
 			fmt.Printf(locale.WinMessage, userName)
+			_, _ = fmt.Fscanln(os.Stdin, &currInput)
 			break
 		} else if currAttempt == seed.CountAttempts {
 			u, err := user.Current()
@@ -58,9 +59,11 @@ func main() {
 				userName = u.Username
 			}
 			fmt.Printf(locale.LoseMessage, userName)
+			_, _ = fmt.Fscanln(os.Stdin, &currInput)
 			break
 		}
 		fmt.Printf(locale.WrongPasswordMessage, seed.CountAttempts-currAttempt, seed.CountAttempts)
+		fmt.Println()
 		fmt.Println()
 	}
 }
