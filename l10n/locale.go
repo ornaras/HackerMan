@@ -6,4 +6,9 @@ type Locale struct {
 	CurrentSeedText string
 
 	SeedStartArgDescription string
+
+	InputPasswordMessage string
+	WrongPasswordMessage string
+	WinMessage           string
+	LoseMessage          string
 }

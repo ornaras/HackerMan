@@ -5,6 +5,8 @@ import (
 	"HackerMan/l10n"
 	"flag"
 	"fmt"
+	"os"
+	"os/user"
 )
 
 var (
@@ -28,4 +30,35 @@ func main() {
 	fmt.Println(locale.CurrentSeedText, ":", seed.ToUint64())
 	dict = generator.GenerateDictionary(seed)
 	passwd = generator.GeneratePassword(seed, dict)
+
+	var currAttempt uint8 = 1
+	for ; currAttempt <= seed.CountAttempts; currAttempt++ {
+		fmt.Print(locale.InputPasswordMessage)
+		var currInput string
+		for {
+			_, _ = fmt.Fscanln(os.Stdin, &currInput)
+			if currInput != "" {
+				break
+			}
+		}
+		if currInput == passwd {
+			u, err := user.Current()
+			var userName = "Anonimous"
+			if err == nil {
+				userName = u.Username
+			}
+			fmt.Printf(locale.WinMessage, userName)
+			break
+		} else if currAttempt == seed.CountAttempts {
+			u, err := user.Current()
+			var userName = "Anonimous"
+			if err == nil {
+				userName = u.Username
+			}
+			fmt.Printf(locale.LoseMessage, userName)
+			break
+		}
+		fmt.Printf(locale.WrongPasswordMessage, seed.CountAttempts-currAttempt, seed.CountAttempts)
+		fmt.Println()
+	}
 }
