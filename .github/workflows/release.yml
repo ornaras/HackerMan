@@ -1,0 +1,58 @@
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.release.outputs.tag_name }}
+      release: ${{ steps.release.outputs.releases_created }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.TOKEN }}
+  build-windows:
+    runs-on: windows-latest
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release == 'true' }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '^1.20.14'
+      - run: |
+          $Env:GOARCH = "386"; go build -ldflags "-s -w" -o "HackerMan-windows-i386.exe"
+          $Env:GOARCH = "amd64"; go build -ldflags "-s -w" -o "HackerMan-windows-amd64.exe"
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.release-please.outputs.tag }}
+          files: |
+            HackerMan-windows-i386.exe
+            HackerMan-windows-amd64.exe
+  build-linux:
+    runs-on: ubuntu-latest
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release == 'true' }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+      - run: |
+          GOARCH="386" go build -ldflags "-s -w" -o "HackerMan-linux-i386"
+          GOARCH="amd64" go build -ldflags "-s -w" -o "HackerMan-linux-amd64"
+          GOARCH="arm" go build -ldflags "-s -w" -o "HackerMan-linux-arm"
+          GOARCH="arm64" go build -ldflags "-s -w" -o "HackerMan-linux-arm64"
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.release-please.outputs.tag }}
+          files: |
+            HackerMan-linux-i386
+            HackerMan-linux-amd64
+            HackerMan-linux-arm
+            HackerMan-linux-arm64

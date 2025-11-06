@@ -1,0 +1,19 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "changelog-sections": [
+        {"type": "feat", "section": "✨ Нововведения", "hidden": false},
+        {"type": "fix", "section": "🐞 Исправления", "hidden": false},
+        {"type": "perf", "section": "⚡ Улучшение производительности", "hidden": false},
+        {"type": "revert", "section": "⏪ Отмена изменений", "hidden": false},
+        {"type": "chore", "section": "🔧 Прочее", "hidden": true},
+        {"type": "test", "section": "✅ Тесты", "hidden": true},
+        {"type": "ci", "section": "🤖 CI", "hidden": true}
+      ],
+      "pull-request-title-pattern": "Релиз: v${version}",
+      "pull-request-header": "🤖 Автоматический релиз, созданный Release Please",
+      "pull-request-footer": "Релиз сформируется после объединения с `main`."
+    }
+  }
+}
