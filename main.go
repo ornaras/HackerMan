@@ -27,7 +27,9 @@ func main() {
 	flag.Parse()
 
 	seed = generator.ParseOrGenerateSeed(numbSeed)
-	fmt.Println(locale.CurrentSeedText, ":", seed.ToUint64())
+	fmt.Println(locale.CurrentSeedMessage, ":", seed.ToUint64())
+	fmt.Println(locale.CountAttemptsMessage, ":", seed.CountAttempts)
+	fmt.Println()
 	dict = generator.GenerateDictionary(seed)
 	passwd = generator.GeneratePassword(seed, dict)
 
